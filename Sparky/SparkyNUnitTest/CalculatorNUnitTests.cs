@@ -37,7 +37,7 @@ namespace Sparky
             double result = calc.AddDoubleNumbers(a, b);
 
             //Assert
-            Assert.AreEqual(15.9, result,.2);
+            Assert.AreEqual(15.9, result, .2);
         }
 
         [Test]
@@ -48,11 +48,11 @@ namespace Sparky
             bool isOdd = calculatorcalc.IsOddNumber(10);
 
             Assert.That(isOdd, Is.False);
-            
+
             //Another way
             //Assert.IsFalse(isOdd);
-        }    
-        
+        }
+
         [Test]
         [TestCase(11)]
         [TestCase(13)]
@@ -63,19 +63,45 @@ namespace Sparky
             bool isOdd = calculatorcalc.IsOddNumber(a);
 
             Assert.That(isOdd, Is.True);
-            
+
             //Another way
             //Assert.IsTrue(isOdd);
         }
 
         [Test]
-        [TestCase(10, ExpectedResult =false)]
-        [TestCase(11, ExpectedResult =true)]
+        [TestCase(10, ExpectedResult = false)]
+        [TestCase(11, ExpectedResult = true)]
         public bool IsOddChecker_InputNUmber_ReturnTrueIfOdd(int a)
         {
             Calculator calculatorcalc = new();
 
             return calculatorcalc.IsOddNumber(a);
+
+        }
+
+        [Test]
+        public void OddRanger_InputMinAndMaxRange_ReturnCalidOddNumberRange()
+        {
+            Calculator calculatorcalc = new();
+
+            List<int> expectedRange = new() { 5, 7, 9 };
+
+            //act
+            List<int> result = calculatorcalc.GetOddRange(5, 10);
+
+            //assert
+
+            Assert.That(result, Is.EquivalentTo(expectedRange));
+            Assert.AreEqual(expectedRange, result);
+            Assert.Contains(7,result);
+            Assert.That(result, Does.Contain(7));
+            Assert.That(result, Has.No.Member(6));
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result.Count, Is.EqualTo(3));
+            Assert.That(result, Is.Ordered);
+            //Assert.That(result, Is.Ordered.Descending);
+            Assert.That(result, Is.Unique);
+
 
         }
     }
